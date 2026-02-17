@@ -1,94 +1,101 @@
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
+import { AVATARS, BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../utils/requestsSlice";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
 
 const Requests = () => {
-  const requests = useSelector((store) => store.requests); // Accessing requests from Redux store
-  const dispatch = useDispatch(); // Dispatch hook to update the Redux store
+  const requests = useSelector((store) => store.requests);
+  const dispatch = useDispatch();
 
-
-  const reviewRequest=async (status,_id)=>{
-    try{
-      const res=await axios.post(BASE_URL + "/request/review/" + status + "/" + _id,
-        {},{withCredentials:true}
+  const reviewRequest = async (status, _id) => {
+    try {
+      await axios.post(
+        BASE_URL + "/request/review/" + status + "/" + _id,
+        {},
+        { withCredentials: true }
       );
       dispatch(removeRequest(_id));
-    }catch(err){
-      console.log(err.message)
-    }
-  }
+    } catch (err) { }
+  };
 
-
-
-
-  // Function to fetch the requests from the backend
   const fetchRequests = async () => {
     try {
-      const res = await axios.get(BASE_URL + "/user/requests", {
+      const res = await axios.get(BASE_URL + "/user/requests/received", {
         withCredentials: true,
       });
-      console.log(res.data.data); // Log the response to ensure it's correct
-      dispatch(addRequests(res.data.data)); // Dispatch the requests to the Redux store
-    } catch (err) {
-      console.log(err.message); // Log errors if any
-    }
+
+      dispatch(addRequests(res.data.data));
+    } catch (err) { }
   };
 
   useEffect(() => {
-    fetchRequests(); // Fetch requests when the component mounts
+    fetchRequests();
   }, []);
 
-  // Make sure requests is an array and has content
-  if (!Array.isArray(requests)) {
-    return <p className="text-xl flex justify-center">Error: Invalid data format</p>;
-  }
+  if (!requests) return null;
 
-  if (requests.length === 0) {
-    return <p className="text-xl flex justify-center">No Requests Found</p>;
-  }
+  if (requests.length === 0)
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-4">
+        <h1 className="text-2xl font-bold text-gray-400 font-geometric">No Pending Requests</h1>
+        <p className="text-gray-500 font-poppins mt-2">Go to Feed to connect with more people!</p>
+      </div>
+    );
+
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold text-center mb-6 text-flex">Requests</h1>
-  
-      <div className="flex flex-col items-center gap-4">
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <h1 className="text-3xl font-bold text-[#073127] font-geometric mb-8 text-center">Connection Requests</h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {requests.map((request) => {
-          const { firstName, lastName, photoUrl, age, gender, about } = request.fromUserId;
-  
+          const { _id, fromUserId } = request;
+          const { firstName, lastName, avatar, age, gender, about, skills } = fromUserId;
+
           return (
             <div
-              key={request._id}
-              className="flex items-center gap-4 p-4 bg-base-300 rounded-lg shadow-md w-full max-w-md"
+              key={_id}
+              className="flex flex-col bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden"
             >
-              <img
-                className="w-20 h-20 rounded-full object-cover"
-                src={photoUrl}
-                alt={`${firstName} ${lastName}`}
-              />
-  
-              <div className="flex-1">
-                <h2 className="text-xl font-semibold text-black">
-                  {firstName} {lastName}
-                </h2>
-                {age && gender && (
-                  <p className="text-sm text-black">
-                    {age} • {gender}
-                  </p>
-                )}
-                {about && (
-                  <p className="text-sm text-black-300 mt-1">{about}</p>
-                )}
-  
-                <div className="flex gap-3 mt-4">
-                  <button className="btn btn-secondary btn-sm"
-                  onClick={()=>reviewRequest("accepted",request._id)}
-                  >Accept</button>
-                  <button className="btn btn-primary btn-sm"
-                   onClick={()=>reviewRequest("rejected",request._id)}
-                  >Reject</button>
+              {/* User Info Header with Image */}
+              <div className="p-4 flex items-center gap-4 border-b border-gray-50">
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#073127]/10 flex-shrink-0">
+                  <img className="w-full h-full object-cover" src={AVATARS[avatar] || AVATARS[0]} alt={firstName} />
                 </div>
+                <div>
+                  <h2 className="text-xl font-bold text-gray-800 font-geometric">{firstName} {lastName}</h2>
+                  <div className="text-sm text-gray-500 font-medium">
+                    {age && <span>{age}, </span>}
+                    {gender && <span className="capitalize">{gender}</span>}
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 flex flex-col items-center text-center">
+                <p className="text-gray-600 text-sm mt-3 line-clamp-2 min-h-[40px]">
+                  {about || "No bio available"}
+                </p>
+
+                {/* Skills Preview */}
+                <div className="flex flex-wrap gap-1 justify-center mt-3">
+                  {skills && skills.slice(0, 3).map((skill, i) => (
+                    <span key={i} className="text-[10px] px-2 py-1 bg-gray-100 text-gray-600 rounded-full">{skill}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gray-50 p-4 flex gap-3 mt-auto">
+                <button
+                  className="flex-1 py-2.5 rounded-xl font-semibold text-red-500 bg-white border border-gray-200 hover:bg-red-50 hover:border-red-200 transition-all font-poppins text-sm"
+                  onClick={() => reviewRequest("rejected", request._id)}
+                >
+                  Reject
+                </button>
+                <button
+                  className="flex-1 py-2.5 rounded-xl font-semibold text-white bg-[#073127] hover:bg-[#0a4d3a] shadow-md hover:shadow-lg transition-all font-poppins text-sm"
+                  onClick={() => reviewRequest("accepted", request._id)}
+                >
+                  Accept
+                </button>
               </div>
             </div>
           );
@@ -96,8 +103,5 @@ const Requests = () => {
       </div>
     </div>
   );
-  
- 
 };
-
 export default Requests;

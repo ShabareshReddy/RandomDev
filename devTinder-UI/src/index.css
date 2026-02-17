@@ -1,2 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Fugaz+One&family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap');
 @import "tailwindcss";
+
+/* Tailwind theme fonts */
+@theme {
+    --font-dm: Nunito, sans-serif;
+    --font-poppins: Poppins, sans-serif;
+    --font-mont: Montserrat, sans-serif;
+    --font-jaro: Jaro, sans-serif;
+    --font-geometric: Righteous, sans-serif;
+    --font-instrument: "Instrument Serif", serif;
+    --font-bungee: Bungee, sans-serif;
+    --font-fugaz: "Fugaz One", sans-serif;
+    --font-ephesis: Ephesis, sans-serif;
+}
+
+@layer utilities {
+    .bg-grid {
+        background-image:
+            linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+        background-size: 48px 48px;
+    }
+
+    .grid-fade {
+        -webkit-mask-image: radial-gradient(circle at center, black 55%, transparent 100%);
+        mask-image: radial-gradient(circle at center, black 55%, transparent 100%);
+    }
+}
+
+/* ============================= */
+/* INFINITE HORIZONTAL SCROLL */
+/* ============================= */
+
+.scroll-track {
+    animation: scroll-x 18s linear infinite;
+}
+
+.scroll-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-x {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
 @plugin "daisyui";
