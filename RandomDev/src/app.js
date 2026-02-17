@@ -6,8 +6,9 @@ const cookieParser=require("cookie-parser");
 const cors=require("cors")
 
 
+
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:process.env.CORS_ORIGIN,
     credentials:true,
 }));
 
@@ -30,8 +31,8 @@ app.use("/",userRouter);
 connectionDB()
 .then(()=>{
     console.log("database connection establised");
-    app.listen(3000,()=>{
-        console.log("server is listening successfully");
+    app.listen(process.env.PORT,()=>{
+        console.log("server is listening successfully on port " + process.env.PORT);
     });
     
     })
