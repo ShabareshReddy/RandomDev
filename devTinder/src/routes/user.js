@@ -1,92 +1,92 @@
 const express = require("express");
 const userRouter = express.Router();
+
 const { userAuth } = require("../middlewares/auth");
-const connectionRequest = require("../models/connectionRequest");
+const ConnectionRequest = require("../models/connectionRequest");
 const User = require("../models/user");
 
+const USER_SAFE_DATA = "firstName lastName avatar age gender about skills";
 
-// who is send request which is Pending
-userRouter.get("/user/requests",userAuth,async(req,res)=>{
-  try{
-    const loggedInUser=req.user;
-    const connectionRequests =await connectionRequest.find({
-      toUserId:loggedInUser._id,
-      status:"interested"
-    }).populate("fromUserId",["firstName","lastName","photoUrl","age","gender","about"]);
+// Get all the pending connection request for the loggedIn user
+userRouter.get("/user/requests/received", userAuth, async (req, res) => {
+  try {
+    const loggedInUser = req.user;
+
+    const connectionRequests = await ConnectionRequest.find({
+      toUserId: loggedInUser._id,
+      status: "interested",
+    }).populate("fromUserId", USER_SAFE_DATA);
+    // }).populate("fromUserId", ["firstName", "lastName"]);
+
     res.json({
-      message:"Data fetched successfully",
-      data:connectionRequests,
+      message: "Data fetched successfully",
+      data: connectionRequests,
+    });
+  } catch (err) {
+    req.statusCode(400).send("ERROR: " + err.message);
+  }
+});
+
+userRouter.get("/user/connections", userAuth, async (req, res) => {
+  try {
+    const loggedInUser = req.user;
+
+    const connectionRequests = await ConnectionRequest.find({
+      $or: [
+        { toUserId: loggedInUser._id, status: "accepted" },
+        { fromUserId: loggedInUser._id, status: "accepted" },
+      ],
+    })
+      .populate("fromUserId", USER_SAFE_DATA)
+      .populate("toUserId", USER_SAFE_DATA);
+
+    console.log(connectionRequests);
+
+    const data = connectionRequests.map((row) => {
+      if (row.fromUserId._id.toString() === loggedInUser._id.toString()) {
+        return row.toUserId;
+      }
+      return row.fromUserId;
     });
 
-  }catch(err){
-    res.status(400).send(err.message);
+    res.json({ data });
+  } catch (err) {
+    res.status(400).send({ message: err.message });
   }
-})
-
-// who is connected me or who has accepted my connection
-userRouter.get("/user/connections",userAuth,async(req,res)=>{
-  try{
-    const loggedInUser=req.user;
-    const connectionRequests=await connectionRequest.find({
-      $or:[
-        {toUserId:loggedInUser._id, status:"accepted"},
-        {fromUserId:loggedInUser._id,status:"accepted"},
-      ]
-    }).populate("fromUserId",["firstName","lastName","photoUrl","age","gender","about"])
-    .populate("toUserId",["firstName","lastName","photoUrl","age","gender","about"]);
-    res.json({
-      data:connectionRequests
-    });
-
-  }catch(err){
-    res.status(400).send("ERROR" + err.message);
-  }
-})
-
+});
 
 userRouter.get("/feed", userAuth, async (req, res) => {
   try {
     const loggedInUser = req.user;
-    const loggedInUserId = loggedInUser._id.toString();
 
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    let limit = parseInt(req.query.limit) || 10;
+    limit = limit > 50 ? 50 : limit;
     const skip = (page - 1) * limit;
 
-    // Find connections (both where user is sender or receiver)
-    const newConnectionRequest = await connectionRequest.find({
-      $or: [
-        { fromUserId: loggedInUserId },
-        { toUserId: loggedInUserId },
-      ]
-    }).select("fromUserId toUserId");
+    const connectionRequests = await ConnectionRequest.find({
+      $or: [{ fromUserId: loggedInUser._id }, { toUserId: loggedInUser._id }],
+    }).select("fromUserId  toUserId");
 
-    // Build a set of user IDs to hide from the feed
-    const hideUserFromFeed = new Set();
-    newConnectionRequest.forEach(req => {
-      hideUserFromFeed.add(req.fromUserId.toString());
-      hideUserFromFeed.add(req.toUserId.toString());
+    const hideUsersFromFeed = new Set();
+    connectionRequests.forEach((req) => {
+      hideUsersFromFeed.add(req.fromUserId.toString());
+      hideUsersFromFeed.add(req.toUserId.toString());
     });
 
-    // Ensure the logged-in user's own profile is also excluded
-    hideUserFromFeed.add(loggedInUserId);
-
-    // Fetch users not in the hidden set
     const users = await User.find({
-      _id: { $nin: Array.from(hideUserFromFeed) }
+      $and: [
+        { _id: { $nin: Array.from(hideUsersFromFeed) } },
+        { _id: { $ne: loggedInUser._id } },
+      ],
     })
-      .select("firstName lastName photoUrl about age gender")
+      .select(USER_SAFE_DATA)
       .skip(skip)
       .limit(limit);
 
-    res.json({
-      message: "Feed fetched successfully",
-      data: users
-    });
-
+    res.json({ data: users });
   } catch (err) {
-    res.status(400).send("ERROR: " + err.message);
+    res.status(400).json({ message: err.message });
   }
 });
-
 module.exports = userRouter;

@@ -1,38 +1,38 @@
-const express=require("express");
-const profileRouter=express.Router();
-const { userAuth }=require("../middlewares/auth.js");
-const {validateEditProfileData}=require("../utils/validations.js")
+const express = require("express");
+const profileRouter = express.Router();
 
+const { userAuth } = require("../middlewares/auth");
+const { validateEditProfileData } = require("../utils/validations");
 
-profileRouter.get("/profile",userAuth,(req,res)=>{
-  try{
-    const loggedInUser=req.user
-    res.send(loggedInUser)
-  }catch(error){
-   res.status(400).send("ERROR " +error.message)
+profileRouter.get("/profile", userAuth, async (req, res) => {
+  try {
+    const user = req.user;
+
+    res.send(user);
+  } catch (err) {
+    res.status(400).send("ERROR : " + err.message);
   }
-})
+});
 
-profileRouter.put("/profile",userAuth,async(req,res)=>{
-    try{
-      if (!validateEditProfileData(req)){
-        throw new Error("invalid edit request");
-      }
+profileRouter.patch("/profile", userAuth, async (req, res) => {
+  try {
+    if (!validateEditProfileData(req)) {
+      throw new Error("Invalid Edit Request");
+    }
 
-      const loggedInUser=req.user;
-      // console.log(loggedInUser);
+    const loggedInUser = req.user;
 
-     Object.keys(req.body).forEach((key)=>loggedInUser[key]=req.body[key]);
-      // console.log(loggedInUser);
-      await loggedInUser.save();
-      
-      res.send(`${loggedInUser.firstName},your profile updated successful`);
-        
-    }catch(err){
-        res.status(400).send(err.message)
-    }   
-    
-})
+    Object.keys(req.body).forEach((key) => (loggedInUser[key] = req.body[key]));
 
+    await loggedInUser.save();
 
-module.exports=profileRouter;
+    res.json({
+      message: `${loggedInUser.firstName}, your profile updated successfuly`,
+      data: loggedInUser,
+    });
+  } catch (err) {
+    res.status(400).send("ERROR : " + err.message);
+  }
+});
+
+module.exports = profileRouter;
