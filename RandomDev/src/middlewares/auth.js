@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-const JWT_SECRET = "NamasteBhai@1234"; // Ensure this matches the secret used in user model
 
 const userAuth = async (req, res, next) => {
   try {
@@ -9,7 +8,7 @@ const userAuth = async (req, res, next) => {
       return res.status(401).send("Please Login!");
     }
 
-    const decodedObj = await jwt.verify(token, JWT_SECRET);
+    const decodedObj = await jwt.verify(token, process.env.JWT_SECRET);
 
     const { _id } = decodedObj;
 
