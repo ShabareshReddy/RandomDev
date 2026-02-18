@@ -24,7 +24,7 @@ const Sidebar = ({ isOpen, close }) => {
 
     const navItems = [
         { path: "/feed", label: "Feed", icon: <FaHome /> },
-        { path: "/connections", label: "Connectionss", icon: <FaUserFriends /> },
+        { path: "/connections", label: "Connections", icon: <FaUserFriends /> },
         { path: "/requests", label: "Requests", icon: <FaUserPlus /> },
         { path: "/profile", label: "Profile", icon: <FaUser /> },
     ];
@@ -56,7 +56,7 @@ const Sidebar = ({ isOpen, close }) => {
                             <span className="text-black font-bold text-lg">D</span>
                         </div>
                         <h1 className="text-xl font-bold tracking-wider text-white">
-                            DevTinder
+                            RandomDev
                         </h1>
                     </Link>
                     <button onClick={close} className="md:hidden text-gray-400 hover:text-red-500">
