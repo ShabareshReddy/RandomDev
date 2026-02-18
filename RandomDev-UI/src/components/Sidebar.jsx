@@ -24,7 +24,7 @@ const Sidebar = ({ isOpen, close }) => {
 
     const navItems = [
         { path: "/feed", label: "Feed", icon: <FaHome /> },
-        { path: "/connections", label: "Connections", icon: <FaUserFriends /> },
+        { path: "/connections", label: "Connectionss", icon: <FaUserFriends /> },
         { path: "/requests", label: "Requests", icon: <FaUserPlus /> },
         { path: "/profile", label: "Profile", icon: <FaUser /> },
     ];
