@@ -10,7 +10,7 @@ const cors=require("cors")
 app.use(cors({
      origin: [
     "http://localhost:5173",
-    "https://your-frontend.vercel.app"
+    "https://randomdev.vercel.app"
   ],
     credentials:true,
 }));
