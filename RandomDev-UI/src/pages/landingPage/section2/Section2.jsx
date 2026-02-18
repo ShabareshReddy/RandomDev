@@ -1,11 +1,10 @@
 import React from "react";
 import { CardCarouselParent } from "../../../components/CardCarouselParent"
 import { motion } from "framer-motion";
-import Logo from "/Logo.png";
 const Section2 = () => {
 
   const images = [
-    { src: Logo, alt: "Image 1" },
+    { src: "https://legacy.skiper-ui.com/_next/image?url=%2Fcard%2F1.png&w=640&q=75", alt: "Image 1" },
     { src: "https://legacy.skiper-ui.com/_next/image?url=%2Fcard%2F2.png&w=640&q=75", alt: "Image 2" },
     { src: "https://legacy.skiper-ui.com/_next/image?url=%2Fcard%2F3.png&w=640&q=75", alt: "Image 3" },
     { src: "https://legacy.skiper-ui.com/_next/image?url=%2Fcard%2F1.png&w=640&q=75", alt: "Image 4" },

@@ -8,7 +8,10 @@ const cors=require("cors")
 
 
 app.use(cors({
-    origin:process.env.CORS_ORIGIN,
+     origin: [
+    "http://localhost:5173",
+    "https://your-frontend.vercel.app"
+  ],
     credentials:true,
 }));
 
@@ -31,8 +34,9 @@ app.use("/",userRouter);
 connectionDB()
 .then(()=>{
     console.log("database connection establised");
-    app.listen(process.env.PORT,()=>{
+    app.listen(process.env.PORT || 3000,()=>{
         console.log("server is listening successfully on port " + process.env.PORT);
+        console.log("CORS ORIGIN:", process.env.CORS_ORIGIN);
     });
     
     })
