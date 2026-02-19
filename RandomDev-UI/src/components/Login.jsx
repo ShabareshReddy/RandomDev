@@ -53,15 +53,15 @@ const Login = () => {
 
       {/* Background Decor */}
       <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
-      <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#073127]/10 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-[#073127]/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#073127]/10  blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-[#073127]/10  blur-[120px] pointer-events-none"></div>
 
       {/* MAIN CARD */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-5xl bg-white shadow-2xl rounded-3xl overflow-hidden flex flex-col md:flex-row relative z-10 border-2 border-[#073127]/10"
+        className="w-full max-w-5xl bg-white shadow-2xl overflow-hidden flex flex-col md:flex-row relative z-10 border-2 border-[#073127]/10"
       >
 
         {/* LEFT SIDE - Developer SVG */}
@@ -106,7 +106,7 @@ const Login = () => {
         </div>
 
         {/* RIGHT FORM SIDE - Made scrollable */}
-        <div className="w-full md:w-1/2 flex flex-col bg-white max-h-[90vh] md:max-h-none overflow-y-auto">
+        <div className=" text-black w-full md:w-1/2 flex flex-col bg-white max-h-[90vh] md:max-h-none overflow-y-auto">
           <div className="p-6 md:p-8 lg:p-10">
             <div className="max-w-md mx-auto w-full">
 
@@ -116,11 +116,11 @@ const Login = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <h2 className="text-3xl font-bold mb-2 text-[#073127] font-geometric">
+                <h2 className="text-3xl font-extrabold mb-2 text-[#073127] font-space tracking-tight">
                   {isSignup ? "Create Account" : "Welcome Back"}
                 </h2>
 
-                <p className="text-gray-600 mb-6 font-poppins text-sm">
+                <p className="text-black mb-6 font-poppins text-sm">
                   {isSignup
                     ? "Join the community of top developers"
                     : "Enter your credentials to access your account"}
@@ -141,44 +141,44 @@ const Login = () => {
                   <>
                     <div className="flex gap-2">
                       <div className="w-1/2">
-                        <label className="block mb-1.5 font-medium text-gray-700 font-poppins text-sm">First Name</label>
+                        <label className="block mb-1.5 font-medium text-black font-poppins text-sm">First Name</label>
                         <input
                           type="text"
                           placeholder="John"
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value)}
-                          className="w-full px-4 py-2.5 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-[#073127] focus:bg-white focus:outline-none transition-all font-poppins text-sm text-black"
+                          className="w-full px-4 py-2.5 bg-white border-2 border-gray-300  focus:border-[#073127] focus:bg-white focus:outline-none transition-all font-poppins text-sm text-black"
                         />
                       </div>
                       <div className="w-1/2">
-                        <label className="block mb-1.5 font-medium text-gray-700 font-poppins text-sm">Last Name</label>
+                        <label className="block mb-1.5 font-medium text-black font-poppins text-sm">Last Name</label>
                         <input
                           type="text"
                           placeholder="Doe"
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
-                          className="w-full px-4 py-2.5 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-[#073127] focus:bg-white focus:outline-none transition-all font-poppins text-sm text-black"
+                          className="w-full px-4 py-2.5 bg-white border-2 border-gray-300 focus:border-[#073127] focus:bg-white focus:outline-none transition-all font-poppins text-sm text-black"
                         />
                       </div>
                     </div>
 
                     <div className="flex gap-2">
                       <div className="w-1/2">
-                        <label className="block mb-1.5 font-medium text-gray-700 font-poppins text-sm">Age</label>
+                        <label className="block mb-1.5 font-medium text-black font-poppins text-sm">Age</label>
                         <input
                           type="number"
                           placeholder="25"
                           value={age}
                           onChange={(e) => setAge(e.target.value)}
-                          className="w-full px-4 py-2.5 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-[#073127] focus:bg-white focus:outline-none transition-all font-poppins text-sm text-black"
+                          className="w-full px-4 py-2.5 bg-white border-2 border-gray-300  focus:border-[#073127] focus:bg-white focus:outline-none transition-all font-poppins text-sm text-black"
                         />
                       </div>
                       <div className="w-1/2">
-                        <label className="block mb-1.5 font-medium text-gray-700 font-poppins text-sm">Gender</label>
+                        <label className="block mb-1.5 font-medium text-black font-poppins text-sm">Gender</label>
                         <select
                           value={gender}
                           onChange={(e) => setGender(e.target.value)}
-                          className="w-full px-4 py-2.5 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-[#073127] focus:bg-white focus:outline-none transition-all font-poppins text-sm text-black"
+                          className="w-full px-4 py-2.5 bg-white border-2 border-gray-300  focus:border-[#073127] focus:bg-white focus:outline-none transition-all font-poppins text-sm text-black"
                         >
                           <option value="" disabled>Select</option>
                           <option value="male">Male</option>
@@ -192,25 +192,25 @@ const Login = () => {
 
                 {/* EMAIL */}
                 <div className="w-full">
-                  <label className="block mb-1.5 font-medium text-gray-700 font-poppins text-sm">Email Address</label>
+                  <label className="block mb-1.5 font-medium text-black font-poppins text-sm">Email Address</label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="w-full px-4 py-2.5 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-[#073127] focus:bg-white focus:outline-none transition-all font-poppins text-sm text-black"
+                    className="w-full px-4 py-2.5 bg-white border-2 border-gray-300  focus:border-[#073127] focus:bg-white focus:outline-none transition-all font-poppins text-sm text-black"
                   />
                 </div>
 
                 {/* PASSWORD */}
                 <div className="w-full">
-                  <label className="block mb-1.5 font-medium text-gray-700 font-poppins text-sm">Password</label>
+                  <label className="block mb-1.5 font-medium text-black font-poppins text-sm">Password</label>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full px-4 py-2.5 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-[#073127] focus:bg-white focus:outline-none transition-all font-poppins text-sm text-black"
+                    className="w-full px-4 py-2.5 bg-white border-2 border-gray-300  focus:border-[#073127] focus:bg-white focus:outline-none transition-all font-poppins text-sm text-black"
                   />
                   {!isSignup && (
                     <div className="mt-1.5 text-right">
@@ -226,7 +226,7 @@ const Login = () => {
                 {/* SUBMIT BUTTON */}
                 <button
                   type="submit"
-                  className="w-full mt-2 py-2.5 bg-[#073127] text-white rounded-xl font-semibold hover:bg-[#0a4d3a] transition-all duration-300 shadow-lg hover:shadow-xl font-poppins text-sm cursor-pointer"
+                  className="w-full mt-2 py-2.5 bg-[#073127] text-white  font-semibold hover:bg-[#0a4d3a] transition-all duration-300 shadow-lg hover:shadow-xl font-poppins text-sm cursor-pointer"
                 >
                   {isSignup ? "Sign Up" : "Login"}
                 </button>

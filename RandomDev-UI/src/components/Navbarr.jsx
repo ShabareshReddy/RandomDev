@@ -20,7 +20,7 @@ const Navbarr = () => {
     };
 
     return (
-        <div className="bg-[#073127] fixed top-4 left-1/2 -translate-x-1/2 w-[95%] sm:w-[70%] md:w-[60%] lg:w-[40%] z-50 text-white h-14 rounded-full flex items-center px-4 sm:px-6 shadow-2xl border border-[#0a4d3a]">
+        <div className="bg-[#073127] fixed top-4 left-1/2 -translate-x-1/2 w-[95%] sm:w-[70%] md:w-[60%] lg:w-[40%] z-50 text-white h-14  flex items-center px-4 sm:px-6 shadow-2xl border border-[#0a4d3a]">
 
             {/* LEFT SIDE */}
             <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
@@ -42,7 +42,7 @@ const Navbarr = () => {
                 </div>
 
                 {/* LOGO TEXT */}
-                <h1 className="text-lg sm:text-xl font-bold tracking-wider font-geometric">
+                <h1 className="text-lg sm:text-xl font-bold tracking-wider font-space">
                     RandomDev
                 </h1>
             </Link>
@@ -81,11 +81,11 @@ const Navbarr = () => {
                         </ul>
                     </div>
                 ) : (
-                    <ul className="flex gap-4 sm:gap-6 text-xs sm:text-sm font-geometric items-center">
+                    <ul className="flex gap-4 sm:gap-6 text-xs sm:text-sm font-space items-center">
                         <Link to="/login" className="hover:text-emerald-200 transition-colors">
                             Login
                         </Link>
-                        <Link to="/login" className="px-4 py-2 bg-emerald-500 text-black rounded-full hover:bg-emerald-400 transition-colors font-bold">
+                        <Link to="/login" className="px-4 py-2 bg-emerald-500 text-black font-space hover:bg-emerald-400 transition-colors font-bold">
                             Sign Up
                         </Link>
                     </ul>

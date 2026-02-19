@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Logo from "./Logo";
 
 const LoadingScreen = ({ onComplete }) => {
     const text = "RandomDev";
@@ -17,9 +18,9 @@ const LoadingScreen = ({ onComplete }) => {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
-                    className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/30 mb-6"
+                    className="flex items-center justify-center mb-6"
                 >
-                    <span className="text-black font-bold text-3xl" style={{ fontFamily: "ephesis" }}>D</span>
+                    <Logo className="w-16 h-16 text-emerald-500 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
                 </motion.div>
 
                 <h1 className="text-5xl md:text-7xl font-bold text-white tracking-wider relative flex" style={{ fontFamily: "ephesis" }}>

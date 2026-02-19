@@ -66,10 +66,10 @@ const Feed = () => {
     return (
       <div className="flex h-screen overflow-hidden bg-black text-white relative">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-[#073127]/20 rounded-full blur-[120px]"></div>
+          <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-[#073127]/20  blur-[120px]"></div>
         </div>
         <div className="flex-1 flex flex-col items-center justify-center min-h-[80vh] text-center p-4 z-10">
-          <div className="bg-white/10 backdrop-blur-md p-6 rounded-full mb-4 border border-white/20 shadow-xl">
+          <div className="bg-white/10 backdrop-blur-md p-6  mb-4 border border-white/20 shadow-xl">
             <FaUndo className="text-4xl text-emerald-400" />
           </div>
           <h1 className="text-3xl font-bold text-white font-geometric mb-2">That's everyone!</h1>
@@ -88,8 +88,8 @@ const Feed = () => {
 
         {/* Animated Background Decor */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-[#073127]/20 rounded-full blur-[120px] animate-pulse"></div>
-          <div className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] bg-emerald-900/10 rounded-full blur-[120px] animate-pulse delay-1000"></div>
+          <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-[#073127]/20  blur-[120px] animate-pulse"></div>
+          <div className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] bg-emerald-900/10  blur-[120px] animate-pulse delay-1000"></div>
         </div>
 
         <div className="relative w-full max-w-sm h-[600px] flex flex-col items-center justify-center z-10">
@@ -115,13 +115,13 @@ const Feed = () => {
         <div className="flex gap-8 mt-8 z-20">
           <button
             onClick={() => onSwipe("left", feed[0]._id)}
-            className="w-16 h-16 bg-black/40 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center shadow-lg text-red-500 hover:bg-red-500/20 hover:scale-110 transition-all cursor-pointer"
+            className="w-16 h-16 bg-black/40 backdrop-blur-md border border-white/10  flex items-center justify-center shadow-lg text-red-500 hover:bg-red-500/20 hover:scale-110 transition-all cursor-pointer"
           >
             <FaTimes className="text-3xl" />
           </button>
           <button
             onClick={() => onSwipe("right", feed[0]._id)}
-            className="w-16 h-16 bg-[#073127] rounded-full flex items-center justify-center shadow-lg text-white hover:bg-[#0a4d3a] hover:scale-110 transition-all cursor-pointer shadow-emerald-900/50"
+            className="w-16 h-16 bg-[#073127]  flex items-center justify-center shadow-lg text-white hover:bg-[#0a4d3a] hover:scale-110 transition-all cursor-pointer shadow-emerald-900/50"
           >
             <FaHeart className="text-3xl" />
           </button>
@@ -179,21 +179,21 @@ const Card = ({ user, isFront, onSwipe, setDragX }) => {
       whileTap={{ cursor: "grabbing" }}
       exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="rounded-3xl shadow-2xl overflow-hidden cursor-grab"
+      className=" shadow-2xl overflow-hidden cursor-grab"
     >
       {/* Visual Overlay for Swipe Direction */}
       {isFront && (
         <>
           <motion.div
             style={{ opacity: interestedOpacity }}
-            className="absolute top-8 left-8 z-20 border-4 border-green-500 rounded-lg px-4 py-1 transform -rotate-12 bg-black/20 backdrop-blur-sm"
+            className="absolute top-8 left-8 z-20 border-4 border-green-500  px-4 py-1 transform -rotate-12 bg-black/20 backdrop-blur-sm"
           >
             <span className="text-green-500 font-bold text-2xl tracking-widest font-geometric">LIKE</span>
           </motion.div>
 
           <motion.div
             style={{ opacity: nopeOpacity }}
-            className="absolute top-8 right-8 z-20 border-4 border-red-500 rounded-lg px-4 py-1 transform rotate-12 bg-black/20 backdrop-blur-sm"
+            className="absolute top-8 right-8 z-20 border-4 border-red-500  px-4 py-1 transform rotate-12 bg-black/20 backdrop-blur-sm"
           >
             <span className="text-red-500 font-bold text-2xl tracking-widest font-geometric">NOPE</span>
           </motion.div>

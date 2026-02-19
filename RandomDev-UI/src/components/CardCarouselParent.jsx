@@ -4,8 +4,7 @@ import "swiper/css"
 import "swiper/css/effect-coverflow"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
-import { FaMagic } from "react-icons/fa"
-import { FaArrowDown } from 'react-icons/fa';
+import Logo from "./Logo"
 import {
     Autoplay,
     EffectCoverflow,
@@ -37,39 +36,46 @@ export const CardCarouselParent = ({
   }
   
   .swiper-3d .swiper-slide-shadow-left {
-    background-image: none;
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
   }
   .swiper-3d .swiper-slide-shadow-right{
-    background: none;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  }
+  
+  .swiper-pagination-bullet {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  .swiper-pagination-bullet-active {
+    background-color: #073127;
+  }
+  .swiper-button-next, .swiper-button-prev {
+    color: white;
   }
   `
     return (
         <section className="w-full">
             <style>{css}</style>
-            <div className="mx-auto w-full max-w-4xl rounded-[24px] border border-black/5 p-2 shadow-sm md:rounded-t-[44px]">
-                <div className="relative mx-auto flex w-full flex-col rounded-[24px] border border-black/5 bg-neutral-800/5 p-2 shadow-sm md:items-start md:gap-8 md:rounded-b-[20px] md:rounded-t-[40px] md:p-2">
+            <div className="mx-auto w-full max-w-5xl rounded-[24px] border border-white/10 bg-white/5 p-2 shadow-2xl backdrop-blur-sm md:rounded-t-[44px]">
+                <div className="relative mx-auto flex w-full flex-col rounded-[24px] border border-white/5 bg-black/20 p-2 shadow-inner md:items-start md:gap-8 md:rounded-b-[20px] md:rounded-t-[40px] md:p-6">
 
-                    {/* Badge Replacement */}
-                    <div className="absolute left-4 top-6 flex items-center gap-2 rounded-full border border-black/10 bg-white/50 px-3 py-1 text-sm md:left-6 backdrop-blur-sm">
-                        <FaMagic className="text-yellow-500" />
-                        <span className="font-medium text-black font-fugaz">RANDOMDEV</span>
+                    {/* Badge */}
+                    <div className="absolute left-4 top-6 flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm md:left-8 backdrop-blur-md shadow-lg z-10">
+                        <Logo className="text-emerald-400 w-5 h-5" />
+                        <span className="font-bold text-white/90 font-space tracking-wider text-xs">RANDOMDEV</span>
                     </div>
 
-                    <div className="flex flex-col justify-center pb-2 pl-4 pt-14 md:items-center">
-                        <div className="flex gap-2">
-                            <div>
-                                <h3 className="text-4xl font-fugaz text-black opacity-85 font-bold tracking-tight">
-                                    SWIPE
-                                </h3>
-                                <h3 className="text-4xl font-fugaz text-black opacity-85 font-bold tracking-tight">
-                                    CONNECT & BUILD
-                                </h3>
-
-                            </div>
+                    <div className="flex flex-col justify-center pb-6 pl-4 pt-16 md:items-center w-full">
+                        <div className="flex flex-col items-center text-center gap-1">
+                            <h3 className="text-3xl md:text-5xl font-space text-white font-bold tracking-tight">
+                                SWIPE. CONNECT.
+                            </h3>
+                            <h3 className="text-3xl md:text-5xl font-space text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 font-bold tracking-tight">
+                                BUILD.
+                            </h3>
                         </div>
                     </div>
 
-                    <div className="flex w-full items-center justify-center gap-4">
+                    <div className="flex w-full items-center justify-center gap-4 mt-4">
                         <div className="w-full">
                             <Swiper
                                 spaceBetween={50}
@@ -85,34 +91,26 @@ export const CardCarouselParent = ({
                                 coverflowEffect={{
                                     rotate: 0,
                                     stretch: 0,
-                                    depth: 100,
+                                    depth: 150,
                                     modifier: 2.5,
+                                    slideShadows: true,
                                 }}
                                 pagination={showPagination}
-                                navigation={
-                                    showNavigation
-                                        ? {
-                                            nextEl: ".swiper-button-next",
-                                            prevEl: ".swiper-button-prev",
-                                        }
-                                        : undefined
-                                }
+                                navigation={showNavigation}
                                 modules={[EffectCoverflow, Autoplay, Pagination, Navigation]}
+                                className="pb-12"
                             >
                                 {images.map((image, index) => (
                                     <SwiperSlide key={index}>
-                                        <div className="size-full rounded-3xl overflow-hidden">
+                                        <div className="size-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                                             <img
                                                 src={image.src}
-                                                className="w-full h-full object-cover rounded-xl"
+                                                className="w-full h-full object-cover"
                                                 alt={image.alt}
                                             />
                                         </div>
                                     </SwiperSlide>
                                 ))}
-                                {/* Duplicate slides for seamless loop effect if needed, though Swiper 'loop={true}' handles it. 
-                                    Keeping simple for now. 
-                                */}
                             </Swiper>
                         </div>
                     </div>

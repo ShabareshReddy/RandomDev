@@ -5,7 +5,7 @@ const UserCard = ({ user }) => {
   const { firstName, lastName, avatar, age, gender, about, skills } = user;
 
   return (
-    <div className="relative w-full h-full bg-black/40 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10 shadow-2xl group transition-all duration-300">
+    <div className="relative w-full h-full bg-black/40 backdrop-blur-xl  overflow-hidden border border-white/10 shadow-2xl group transition-all duration-300">
 
       {/* Background Image - Full height, acting as the base */}
       <img
@@ -29,7 +29,7 @@ const UserCard = ({ user }) => {
         </div>
 
         {/* Bio */}
-        <div className="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10">
+        <div className="bg-white/10 backdrop-blur-sm p-3  border border-white/10">
           <p className="text-sm text-gray-200 font-poppins line-clamp-3 leading-relaxed">
             {about || "No bio available. Just a mysterious developer wandering the coding plains."}
           </p>
@@ -38,7 +38,7 @@ const UserCard = ({ user }) => {
         {/* Stats & Action Row */}
         <div className="flex items-center justify-between mt-2">
           {/* Stats with Glass Pill */}
-          <div className="flex items-center gap-4 text-sm font-medium bg-black/30 px-4 py-2 rounded-full border border-white/10 backdrop-blur-sm">
+          <div className="flex items-center gap-4 text-sm font-medium bg-black/30 px-4 py-2  border border-white/10 backdrop-blur-sm">
             <div className="flex items-center gap-1.5 text-gray-200">
               <FaUserFriends className="text-emerald-400" />
               <span>{Math.floor(Math.random() * 500) + 100}</span>
@@ -52,7 +52,7 @@ const UserCard = ({ user }) => {
 
           {/* Follow Button */}
           <div className="pointer-events-auto">
-            <button className="bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold py-2.5 px-6 rounded-full shadow-lg hover:shadow-emerald-500/30 hover:scale-105 transition-all flex items-center gap-2 text-sm border border-emerald-400/50">
+            <button className="bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold py-2.5 px-6  shadow-lg hover:shadow-emerald-500/30 hover:scale-105 transition-all flex items-center gap-2 text-sm border border-emerald-400/50">
               Follow <span>+</span>
             </button>
           </div>

@@ -156,12 +156,12 @@ const Section1 = () => {
           variants={itemVariants}
           className="px-8 py-12 md:px-16 md:py-20 "
         >
-          <h1 className="font-geometric font-extrabold text-[#073127] tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
+          <h1 className="font-space font-extrabold text-[#073127] tracking-tighter text-3xl sm:text-4xl md:text-5xl lg:text-6xl ">
             Find Your Tribe,
             <br />
             Build Your Network.
           </h1>
-          <p className="text-black font-instrument text-xl mt-4">Connect with like-minded professionals and expand your network.</p>
+          <p className="text-black font-instrument text-2xl mt-4">Connect with like-minded professionals and expand your network.</p>
         </motion.div>
 
 
@@ -172,9 +172,8 @@ const Section1 = () => {
           whileTap={{ scale: 0.95 }}
           className="
             flex items-center gap-2
-            bg-[#073127] text-white font-medium
-            px-8 py-3
-            rounded-full mt-8
+            bg-[#073127] text-white font-space
+            px-8 py-3 mt-8
             border-2 border-transparent
             hover:border-[#073127]
             hover:bg-transparent
@@ -194,17 +193,19 @@ const Section1 = () => {
           className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 max-w-4xl w-full"
         >
           {/* Card 1 */}
-          <div className="bg-white/80 backdrop-blur-md border-2 border-[#073127]/20 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <h3 className="font-geometric font-bold text-[#073127] text-xl mb-3">Connect Instantly</h3>
-            <p className="text-black font-instrument font-semibold text-md leading-relaxed">
+          <div className="bg-[#073127] backdrop-blur-md border border-white/10 p-8 shadow-2xl hover:shadow-emerald-900/40 hover:-translate-y-1 transition-all duration-300  group text-left">
+
+            <h3 className="font-space tracking-tight font-bold text-white text-xl mb-3 group-hover:text-green-400 transition-colors">Connect Instantly</h3>
+            <p className="text-zinc-300 font-instrument text-md">
               Match with developers who share your interests and start collaborating on exciting projects.
             </p>
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white/80 backdrop-blur-md border-2 border-[#073127]/20 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <h3 className="font-geometric font-bold text-[#073127] text-xl mb-3">Grow Together</h3>
-            <p className="text-black font-instrument font-bold text-md leading-loose">
+          <div className="bg-[#073127] backdrop-blur-md border border-white/10 p-8 shadow-2xl hover:shadow-emerald-900/40 hover:-translate-y-1 transition-all duration-300  text-left group">
+
+            <h3 className="font-space tracking-tight font-bold text-white text-xl mb-3 group-hover:text-green-400 transition-colors">Grow Together</h3>
+            <p className="text-zinc-300 font-instrument font-medium text-md ">
               Build meaningful connections and level up your skills with a supportive community.
             </p>
           </div>

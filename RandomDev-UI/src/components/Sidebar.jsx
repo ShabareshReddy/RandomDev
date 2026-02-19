@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../utils/userSlice";
 import { FaHome, FaUserFriends, FaUserPlus, FaUser, FaSignOutAlt, FaTimes } from "react-icons/fa";
+import Logo from "./Logo";
 
 const Sidebar = ({ isOpen, close }) => {
     const user = useSelector((store) => store.user);
@@ -46,16 +47,16 @@ const Sidebar = ({ isOpen, close }) => {
                 w-64 bg-black border-r border-white/10
                 transform transition-transform duration-300 ease-in-out
                 ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
-                flex flex-col h-full font-geometric text-white
+                flex flex-col h-full font-space text-white
             `}>
 
                 {/* Header */}
                 <div className="p-6 flex items-center justify-between border-b border-white/10">
                     <Link to="/feed" className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                            <span className="text-black font-bold text-lg">D</span>
+                        <div className="w-8 h-8 flex items-center justify-center">
+                            <Logo className="w-8 h-8 text-emerald-500" />
                         </div>
-                        <h1 className="text-xl font-bold tracking-wider text-white">
+                        <h1 className="text-xl font-space tracking-tight font-bold text-white">
                             RandomDev
                         </h1>
                     </Link>
@@ -74,7 +75,7 @@ const Sidebar = ({ isOpen, close }) => {
                         />
                     </div>
                     <h2 className="font-bold text-lg text-white tracking-wide">{user.firstName}</h2>
-                    <p className="text-xs text-emerald-400 capitalize bg-emerald-500/10 px-3 py-1 rounded-full mt-1 border border-emerald-500/20">
+                    <p className="text-xs text-emerald-400 capitalize bg-emerald-500/10 px-3 py-1  mt-1 border border-emerald-500/20">
                         {user.gender || "Developer"}
                     </p>
                 </div>
@@ -89,10 +90,10 @@ const Sidebar = ({ isOpen, close }) => {
                                 to={item.path}
                                 onClick={() => close()}
                                 className={`
-                                    flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 group
+                                    flex items-center gap-4 px-4 py-3  transition-all duration-200 group
                                     ${isActive
-                                        ? "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white shadow-lg shadow-emerald-500/20 border border-emerald-400/20"
-                                        : "text-gray-400 hover:bg-white/5 hover:text-white"
+                                        ? "bg-green-400 text-black tracking-tight shadow-lg shadow-emerald-500/20 border border-emerald-400/20"
+                                        : "text-white hover:bg-white/5 hover:text-white"
                                     }
                                 `}
                             >
@@ -109,7 +110,7 @@ const Sidebar = ({ isOpen, close }) => {
                 <div className="p-4 border-t border-white/10">
                     <button
                         onClick={handleLogout}
-                        className="flex items-center gap-3 px-4 py-3 w-full text-red-500 hover:bg-red-500/10 rounded-xl transition-colors font-medium border border-transparent hover:border-red-500/20"
+                        className="flex items-center gap-3 px-4 py-3 w-full text-red-500 hover:bg-red-500/10  transition-colors font-medium border border-transparent hover:border-red-500/20"
                     >
                         <FaSignOutAlt />
                         <span>Logout</span>
