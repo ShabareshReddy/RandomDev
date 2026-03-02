@@ -11,6 +11,8 @@ const Message = require("./models/message");
 const ConnectionRequest = require("./models/connectionRequest");
 
 const app = express();
+app.set("trust proxy", 1);
+
 const server = http.createServer(app);
 
 const ALLOWED_ORIGINS = [
@@ -19,12 +21,10 @@ const ALLOWED_ORIGINS = [
   "https://randomdev.vercel.app",
 ];
 
-/* ── CORS ── */
 app.use(cors({ origin: ALLOWED_ORIGINS, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-/* ── Routes ── */
 const authRouter    = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 const requestRouter = require("./routes/request");
@@ -40,12 +40,9 @@ app.use("/", chatRouter);
 app.use("/", uploadRouter);
 app.use("/uploads", express.static("uploads"));
 
-/* ── Socket.io ── */
 const io = new Server(server, {
   cors: { origin: ALLOWED_ORIGINS, credentials: true },
 });
-
-// Helper: validate that two users have an accepted connection
 const areConnected = async (id1, id2) => {
   const conn = await ConnectionRequest.findOne({
     $or: [
@@ -56,7 +53,6 @@ const areConnected = async (id1, id2) => {
   return !!conn;
 };
 
-// Middleware: authenticate every socket via JWT cookie
 io.use(async (socket, next) => {
   try {
     // Cookies arrive in socket.handshake.headers.cookie
@@ -79,7 +75,6 @@ io.on("connection", (socket) => {
   const me = socket.data.user;
   console.log(`Socket connected: ${me.firstName} (${me._id})`);
 
-  // Client joins a chat with a specific user
   socket.on("joinChat", async ({ targetUserId }) => {
     try {
       const connected = await areConnected(me._id, targetUserId);
@@ -87,7 +82,6 @@ io.on("connection", (socket) => {
         socket.emit("error", { message: "Not connected with this user." });
         return;
       }
-      // Deterministic room — same for both participants
       const room = [me._id.toString(), targetUserId].sort().join("_");
       socket.join(room);
       socket.data.room = room;
@@ -134,7 +128,6 @@ io.on("connection", (socket) => {
   });
 });
 
-/* ── Start ── */
 connectionDB()
   .then(() => {
     console.log("Database connection established");
