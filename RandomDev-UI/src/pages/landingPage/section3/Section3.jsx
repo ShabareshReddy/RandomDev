@@ -2,34 +2,33 @@ import React from "react";
 import { motion } from "framer-motion";
 import { GoArrowRight } from "react-icons/go";
 
+
 const courses = [
   {
-    title: "Data Science & Gen AI",
-    desc: "Harness the power of data. Master visualization, predictive modeling, and Generative AI to make smarter decisions and build intelligent systems.",
+    title: "Dev Connections",
+    desc: "Discover and connect with developers across technologies. Grow your professional network, explore profiles, and build meaningful collaborations within the RandomDev community.",
 
-    tags: ["AI Integrated", "Analytics"],
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+    tags: ["Networking", "Community"],
+    image: "/Feed.png",
     icon: "📊",
     color: "text-blue-900",
   },
   {
-    title: "Data Science & Gen AI",
-    desc: "Harness the power of data. Master visualization, predictive modeling, and Generative AI to make smarter decisions and build intelligent systems.",
+    title: "Connection Requests",
+    desc: "Send, receive, and manage connection requests. Build your trusted developer circle and expand opportunities through mutual collaborations.",
 
-    tags: ["AI Integrated", "Analytics"],
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+    tags: ["Networking", "Requests"],
+    image: "/connections.png",
     icon: "📊",
     color: "text-blue-900",
   },
   {
-    title: "Data Science & Gen AI",
-    desc: "Harness the power of data. Master visualization, predictive modeling, and Generative AI to make smarter decisions and build intelligent systems.",
+    title: "Real-Time Communication",
+    desc: "Chat in real time, discuss projects, share ideas, and collaborate effectively through seamless developer messaging.",
 
-    tags: ["AI Integrated", "Analytics"],
+    tags: ["Messaging", "Real-Time"],
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+      "/chatimg.png",
     icon: "📊",
     color: "text-blue-900",
   },
@@ -49,9 +48,9 @@ const Section3 = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-6xl font-space font-black text-white mb-6 tracking-tight"
+          className="text-4xl  md:text-6xl font-space font-extrabold  text-white mb-6 tracking-tight"
         >
-          Forge Your Path.
+          Connect • Collaborate • Communicate
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -60,7 +59,7 @@ const Section3 = () => {
           viewport={{ once: true }}
           className="text-xl md:text-xl text-zinc-400 font-instrument leading-relaxed"
         >
-          Elite curriculums designed for the modern engineer. Stop learning syntax, start building value.
+          From connection requests to real-time communication — RandomDev brings developers together.
         </motion.p>
       </div>
 
@@ -91,64 +90,31 @@ const Section3 = () => {
                   ))}
                 </div>
 
-                <h3 className="text-3xl md:text-5xl font-space font-bold text-zinc-900 mb-6 tracking-tight">
+                <h3 className="text-3xl md:text-5xl font-space font-bold text-zinc-900 mb-6 tracking-tighter">
                   {course.title}
                 </h3>
 
-                <p className="text-zinc-600 font-instrument text-lg md:text-xl leading-relaxed max-w-lg">
+                <p className="text-zinc-700 font-instrument text-sm md:text-xl leading-relaxed max-w-lg">
                   {course.desc}
                 </p>
               </div>
 
-              {/* PRICE + BUTTON */}
-              <div className="flex items-center justify-between border-t border-zinc-100 pt-8 mt-auto">
-                <div className="flex flex-col">
-                  <span className="text-sm text-zinc-400 font-medium line-through mb-1 font-mono">
-                    {course.oldPrice}
-                  </span>
-                  <div className="text-3xl font-geometric font-bold text-[#073127]">
-                    {course.price}
-                  </div>
-                </div>
 
-              </div>
             </div>
 
             {/* RIGHT IMAGE SIDE */}
-            <div className="flex-1 order-1 md:order-2 p-3 md:p-4 flex items-center justify-center min-h-[300px] md:min-h-auto">
+            <div className="flex-1 order-1 md:order-2 p-3 md:p-4 h-[280px] md:h-full flex items-stretch">
 
-              {/* OUTER FRAME - Styled like a device/container */}
-              <div className="w-full h-full bg-zinc-700 rounded-xl p-3 shadow-inner flex items-center justify-center relative overflow-hidden">
+              {/* OUTER FRAME */}
+              <div className="w-full h-full rounded-md overflow-hidden bg-zinc-900 shadow-inner">
 
-                {/* Subtle sheen on the dark frame */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50 pointer-events-none"></div>
+                {/* IMAGE — fills the frame completely */}
+                <img
+                  src={course.image}
+                  alt={course.title}
+                  className="w-full h-full object-cover"
+                />
 
-                {/* INNER FRAME */}
-                <div className="w-full h-full bg-zinc-800 r overflow-hidden shadow-2xl relative group-hover:scale-[0.98] transition-transform duration-700 ease-out">
-
-                  {/* IMAGE */}
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
-                  />
-
-                  {/* OVERLAY VISUALS */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60"></div>
-
-                  {/* FLOATING ICON */}
-                  <div className="absolute top-6 right-6 w-14 h-14 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center text-3xl shadow-lg z-20 group-hover:rotate-12 transition-transform duration-500">
-                    {course.icon}
-                  </div>
-
-                  {/* Decorative Elements on Image */}
-                  <div className="absolute bottom-6 left-6 z-20">
-                    <div className="bg-black/30 backdrop-blur-md border border-white/10 px-4 py-2 rounded-lg">
-                      <span className="text-white/90 text-xs font-mono">Verified Curriculum</span>
-                    </div>
-                  </div>
-
-                </div>
               </div>
             </div>
 

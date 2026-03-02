@@ -62,7 +62,7 @@ const Connections = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {connections.map((connection) => {
-              const { _id, firstName, lastName, avatar, age, gender, about } =
+              const { _id, firstName, lastName, avatar, gender, about, skills } =
                 connection;
 
               return (
@@ -73,7 +73,7 @@ const Connections = () => {
                   {/* Full Background Image */}
                   <img
                     className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700"
-                    src={AVATARS[avatar] || AVATARS[0]}
+                    src={AVATARS[avatar] ?? AVATARS[0]}
                     alt={firstName}
                   />
 
@@ -91,9 +91,7 @@ const Connections = () => {
                         </h2>
                         <FaCheckCircle className="text-emerald-400 text-lg drop-shadow-md" />
                       </div>
-                      <p className="text-emerald-400 font-poppins text-xs font-medium tracking-wide">
-                        {gender || "Developer"} {age && `• ${age}`}
-                      </p>
+
                     </div>
 
                     {/* Bio Snippet */}
@@ -105,7 +103,7 @@ const Connections = () => {
 
                     {/* Action Button */}
                     <Link to={"/chat/" + _id} className="w-full">
-                      <button className="w-full py-3 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 shadow-lg shadow-emerald-900/20 hover:shadow-emerald-500/30 transition-all font-poppins text-sm flex items-center justify-center gap-2">
+                      <button className="w-full py-3 rounded-xl font-bold text-white bg-green-600 hover:bg-green-500 shadow-lg shadow-green-900/20 hover:shadow-green-500/30 transition-all font-poppins text-sm flex items-center justify-center gap-2">
                         <FaCommentDots className="text-lg" />
                         <span>Message</span>
                       </button>

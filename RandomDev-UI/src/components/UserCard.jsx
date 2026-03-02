@@ -1,62 +1,85 @@
 import { AVATARS } from "../utils/constants";
-import { FaCheckCircle, FaUserFriends, FaRegImage } from "react-icons/fa";
+import { FaCheckCircle, FaHeart, FaTimes } from "react-icons/fa";
 
-const UserCard = ({ user }) => {
-  const { firstName, lastName, avatar, age, gender, about, skills } = user;
+const UserCard = ({ user, onLike, onPass }) => {
+  const { firstName, lastName, avatar, gender, about, skills } = user;
+
+  // Derive a role title from primary skill
+  const primarySkill = skills && skills.length > 0 ? skills[0] : null;
+  const roleTitle = primarySkill ? `${primarySkill} Developer` : "Software Developer";
 
   return (
-    <div className="relative w-full h-full bg-black/40 backdrop-blur-xl  overflow-hidden border border-white/10 shadow-2xl group transition-all duration-300">
+    <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl group">
 
-      {/* Background Image - Full height, acting as the base */}
+      {/* ── Full-bleed avatar photo ── */}
       <img
-        src={AVATARS[avatar] || AVATARS[0]}
+        src={AVATARS[avatar] ?? AVATARS[0]}
         alt={firstName}
-        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
+        className="absolute inset-0 w-full h-full object-cover object-top"
       />
 
-      {/* Gradient Overlay for Text Readability - Stronger at bottom */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none"></div>
+      {/* ── Gradient overlay — starts ~halfway, fully opaque at bottom ── */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.85) 30%, rgba(10,10,10,0.1) 60%, transparent 100%)",
+        }}
+      />
 
-      {/* Content Container */}
-      <div className="absolute bottom-0 left-0 w-full p-6 text-white flex flex-col gap-4 z-10">
+      {/* ── Text content pinned to bottom ── */}
+      <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-4 flex flex-col gap-2.5 z-10">
 
-        {/* Name & Verification */}
+        {/* Name + verified */}
         <div className="flex items-center gap-2">
-          <h2 className="text-3xl font-bold font-geometric tracking-wide text-white drop-shadow-md">
+          <h2 className="text-xl font-bold text-white font-space tracking-tight drop-shadow-md">
             {firstName} {lastName}
           </h2>
-          <FaCheckCircle className="text-emerald-400 text-xl drop-shadow-md" />
+          <FaCheckCircle className="text-emerald-400 text-base flex-shrink-0" />
         </div>
 
-        {/* Bio */}
-        <div className="bg-white/10 backdrop-blur-sm p-3  border border-white/10">
-          <p className="text-sm text-gray-200 font-poppins line-clamp-3 leading-relaxed">
-            {about || "No bio available. Just a mysterious developer wandering the coding plains."}
-          </p>
-        </div>
+        {/* Role tag */}
+        <span className="text-[11px] bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full w-fit border border-emerald-500/30 font-mono backdrop-blur-sm">
+          {roleTitle}
+        </span>
 
-        {/* Stats & Action Row */}
-        <div className="flex items-center justify-between mt-2">
-          {/* Stats with Glass Pill */}
-          <div className="flex items-center gap-4 text-sm font-medium bg-black/30 px-4 py-2  border border-white/10 backdrop-blur-sm">
-            <div className="flex items-center gap-1.5 text-gray-200">
-              <FaUserFriends className="text-emerald-400" />
-              <span>{Math.floor(Math.random() * 500) + 100}</span>
-            </div>
-            <div className="w-[1px] h-4 bg-white/20"></div>
-            <div className="flex items-center gap-1.5 text-gray-200">
-              <FaRegImage className="text-blue-400" />
-              <span>{Math.floor(Math.random() * 50) + 10}</span>
-            </div>
+        {/* About bio */}
+        <p className="text-zinc-300 text-xs leading-relaxed line-clamp-2 font-poppins">
+          {about || "Passionate developer crafting amazing things."}
+        </p>
+
+        {/* Skills pills */}
+        {skills && skills.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {skills.slice(0, 4).map((s, i) => (
+              <span
+                key={i}
+                className="text-[10px] bg-white/10 text-white px-2.5 py-1 rounded-full border border-white/15 font-mono backdrop-blur-sm"
+              >
+                {s}
+              </span>
+            ))}
           </div>
+        )}
 
-          {/* Follow Button */}
-          <div className="pointer-events-auto">
-            <button className="bg-gradient-to-r from-emerald-500 to-green-600 text-white font-bold py-2.5 px-6  shadow-lg hover:shadow-emerald-500/30 hover:scale-105 transition-all flex items-center gap-2 text-sm border border-emerald-400/50">
-              Follow <span>+</span>
-            </button>
-          </div>
+        {/* ── Action Buttons ── */}
+        <div className="flex gap-3 mt-1">
+          <button
+            onClick={onPass}
+            className="flex-1 py-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 text-white hover:bg-red-500/25 hover:text-red-400 hover:border-red-500/30 transition-all font-poppins text-sm flex items-center justify-center gap-2"
+          >
+            <FaTimes className="text-xs" />
+            Ignore
+          </button>
+          <button
+            onClick={onLike}
+            className="flex-1 py-2.5 rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 transition-all font-poppins text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/60"
+          >
+            <FaHeart className="text-xs" />
+            Interested
+          </button>
         </div>
+
       </div>
     </div>
   );

@@ -19,14 +19,18 @@ const iconsRow1 = [
 ];
 
 const developers = [
-  { name: "Sarah K.", role: "Full Stack", image: "https://randomuser.me/api/portraits/women/44.jpg", skill: "React" },
-  { name: "James L.", role: "Backend", image: "https://randomuser.me/api/portraits/men/32.jpg", skill: "Node.js" },
-  { name: "Elena R.", role: "DevOps", image: "https://randomuser.me/api/portraits/women/65.jpg", skill: "AWS" },
-  { name: "Michael C.", role: "Mobile", image: "https://randomuser.me/api/portraits/men/86.jpg", skill: "Flutter" },
-  { name: "David W.", role: "Frontend", image: "https://randomuser.me/api/portraits/men/11.jpg", skill: "Vue" },
-  { name: "Priya M.", role: "Data Sci", image: "https://randomuser.me/api/portraits/women/28.jpg", skill: "Python" },
-  { name: "Tom H.", role: "UI/UX", image: "https://randomuser.me/api/portraits/men/45.jpg", skill: "Figma" },
-  { name: "Alex B.", role: "Security", image: "https://randomuser.me/api/portraits/women/68.jpg", skill: "CyberSec" },
+  { name: "Sarah K.", role: "SWE", image: "https://randomuser.me/api/portraits/women/44.jpg" },
+  { name: "James L.", role: "SDE", image: "https://randomuser.me/api/portraits/men/32.jpg" },
+  { name: "Elena R.", role: "DevOps Specialist", image: "https://randomuser.me/api/portraits/women/65.jpg" },
+  { name: "Michael C.", role: "QA Engineer", image: "https://randomuser.me/api/portraits/men/86.jpg" },
+  { name: "David W.", role: "Frontend Dev", image: "https://randomuser.me/api/portraits/men/11.jpg" },
+  { name: "Priya M.", role: "ML Engineer", image: "https://randomuser.me/api/portraits/women/28.jpg" },
+  { name: "Tom H.", role: "UI/UX Designer", image: "https://randomuser.me/api/portraits/men/45.jpg" },
+  { name: "Alex B.", role: "Security Specialist", image: "https://randomuser.me/api/portraits/women/68.jpg" },
+  { name: "Ryan S.", role: "SDE II", image: "https://randomuser.me/api/portraits/men/53.jpg" },
+  { name: "Aisha T.", role: "Testing Engineer", image: "https://randomuser.me/api/portraits/women/12.jpg" },
+  { name: "Carlos M.", role: "Cloud Architect", image: "https://randomuser.me/api/portraits/men/74.jpg" },
+  { name: "Nina P.", role: "Backend Dev", image: "https://randomuser.me/api/portraits/women/37.jpg" },
 ];
 
 const MarqueeRow = ({ items, type = "icon", direction = "left", speed = 20 }) => {
@@ -47,28 +51,30 @@ const MarqueeRow = ({ items, type = "icon", direction = "left", speed = 20 }) =>
           <div
             key={index}
             className={`
-              bg-white rounded-2xl flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-300 shrink-0
-              ${type === "icon" ? "w-20 h-20 md:w-24 md:h-24" : "w-auto h-20 md:h-24 px-4 min-w-[200px]"}
+              bg-white rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 shrink-0 flex items-center justify-center
+              ${type === "icon" ? "w-20 h-20 md:w-24 md:h-24" : "w-[180px] h-[120px] md:w-[200px] md:h-[130px] p-4"}
             `}
           >
             {type === "icon" ? (
               <item.Icon className={`text-4xl md:text-5xl ${item.color}`} />
             ) : (
-              <div className="flex items-center gap-4 w-full">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-2 border-zinc-100"
-                />
-                <div className="flex flex-col text-left">
-                  <span className="text-zinc-900 font-bold text-sm md:text-base leading-tight">
+              <div className="flex flex-col w-full h-full justify-between">
+                {/* Top row: avatar + name */}
+                <div className="flex items-center gap-2.5">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-green-200 shrink-0"
+                  />
+                  <span className="text-zinc-900 font-bold text-sm md:text-base leading-tight truncate">
                     {item.name}
                   </span>
-                  <div className="flex items-center gap-1.5 mt-1">
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-white bg-black px-1.5 py-0.5 rounded-md">
-                      {item.role}
-                    </span>
-                  </div>
+                </div>
+                {/* Role badge */}
+                <div className="mt-2">
+                  <span className="inline-block text-[11px] md:text-xs font-semibold tracking-wide text-green-700 border border-green-500 bg-green-50 px-2.5 py-0.5 rounded-full">
+                    {item.role}
+                  </span>
                 </div>
               </div>
             )}
@@ -94,8 +100,8 @@ const Section2 = () => {
         {/* Badge */}
         <div className="mb-8 px-4 py-1.5  border border-white/20 bg-white/10 backdrop-blur-md">
           <span className="text-white/80 font-mono text-xs uppercase tracking-widest flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Tech Ecosystem
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            Code Without Boundaries
           </span>
         </div>
 
@@ -106,7 +112,7 @@ const Section2 = () => {
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-6xl font-space font-bold text-white mb-6 tracking-tight"
         >
-          Built for every stack.
+          One Platform. Infinite Devs.
         </motion.h2>
 
         <motion.p
@@ -116,14 +122,15 @@ const Section2 = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg md:text-xl text-zinc-300 font-instrument max-w-2xl leading-relaxed"
         >
-          We understand the hassle of switching tools. That's why we integrate seamlessly with the languages and frameworks you use every day.
+          A unified platform designed for developers across technologies — enabling seamless collaboration, meaningful connections, and growth beyond code.
         </motion.p>
       </div>
 
       {/* MARQUEE ROWS */}
       <div className="w-full flex flex-col gap-8 relative z-10 rotate-[-2deg] scale-105">
-        <MarqueeRow items={iconsRow1} type="icon" direction="left" speed={40} />
         <MarqueeRow items={developers} type="profile" direction="right" speed={50} />
+        <MarqueeRow items={iconsRow1} type="icon" direction="left" speed={40} />
+
       </div>
 
       {/* FOOTER LINK */}
@@ -135,7 +142,7 @@ const Section2 = () => {
         className="mt-16 relative z-20"
       >
         <button className="text-white/70 hover:text-white font-space border-b border-white/30 hover:border-white transition-all pb-1 text-sm tracking-widest uppercase">
-          View All Integrations →
+          Explore Now →
         </button>
       </motion.div>
 

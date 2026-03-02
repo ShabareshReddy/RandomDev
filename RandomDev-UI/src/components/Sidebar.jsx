@@ -67,16 +67,16 @@ const Sidebar = ({ isOpen, close }) => {
 
                 {/* User Profile Summary */}
                 <div className="p-6 flex flex-col items-center border-b border-white/10 bg-white/5 backdrop-blur-sm">
-                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/20 mb-3">
+                    <div className="w-25 h-25 rounded-full overflow-hidden border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/20 mb-3">
                         <img
                             alt="user photo"
-                            src={AVATARS[user.avatar] || AVATARS[0]}
+                            src={AVATARS[user.avatar] ?? AVATARS[0]}
                             className="w-full h-full object-cover"
                         />
                     </div>
-                    <h2 className="font-bold text-lg text-white tracking-wide">{user.firstName}</h2>
+                    <h2 className="font-bold text-lg text-white tracking-wide">{user.firstName} {user.lastName}</h2>
                     <p className="text-xs text-emerald-400 capitalize bg-emerald-500/10 px-3 py-1  mt-1 border border-emerald-500/20">
-                        {user.gender || "Developer"}
+                        {'SDE'}
                     </p>
                 </div>
 

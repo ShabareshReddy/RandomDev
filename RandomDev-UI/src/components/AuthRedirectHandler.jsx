@@ -20,9 +20,9 @@ const AuthRedirectHandler = () => {
                         withCredentials: true,
                     });
                     dispatch(addUser(res.data));
-                    // After successful restore, if on public page, redirect to feed
+                    // After successful restore, if on public page, redirect to profile
                     if (["/", "/login", "/signup"].includes(location.pathname)) {
-                        navigate("/feed");
+                        navigate("/profile");
                     }
                 } catch (err) {
                     // Session invalid or expired. User stays on public page.
@@ -30,7 +30,7 @@ const AuthRedirectHandler = () => {
             } else {
                 // If user IS logged in, STRICTLY redirect from public pages.
                 if (["/", "/login", "/signup"].includes(location.pathname)) {
-                    navigate("/feed");
+                    navigate("/profile");
                 }
             }
         };

@@ -49,7 +49,7 @@ const LoadingScreen = ({ onComplete }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.5, duration: 1 }}
-                    className="mt-4 text-gray-400 font-poppins tracking-widest text-sm uppercase"
+                    className="mt-4 text-gray-400 font-instrument tracking-widest text-sm uppercase"
                 >
                     Finding your peer...
                 </motion.p>

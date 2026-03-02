@@ -64,19 +64,46 @@ const Feed = () => {
 
   if (feed.length <= 0)
     return (
-      <div className="flex h-screen overflow-hidden bg-black text-white relative">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-[#073127]/20  blur-[120px]"></div>
+      <div className="flex h-screen overflow-hidden bg-black text-white relative items-center justify-center">
+
+        {/* Stacked RANDOMDEV watermark */}
+        <div className="absolute inset-0 flex flex-col justify-center overflow-hidden pointer-events-none select-none" aria-hidden="true">
+          {["RANDOMDEV", "RANDOMDEV", "RANDOMDEV", "RANDOMDEV", "RANDOMDEV"].map((word, i) => (
+            <div
+              key={i}
+              className="whitespace-nowrap text-[clamp(80px,12vw,160px)] font-black uppercase tracking-tighter leading-none"
+              style={{
+                color: "rgba(255,255,255,0.05)",
+                fontFamily: "'Space Grotesk', sans-serif",
+                marginLeft: i % 2 === 0 ? "0px" : "-60px",
+              }}
+            >
+              {word}
+            </div>
+          ))}
         </div>
-        <div className="flex-1 flex flex-col items-center justify-center min-h-[80vh] text-center p-4 z-10">
-          <div className="bg-white/10 backdrop-blur-md p-6  mb-4 border border-white/20 shadow-xl">
-            <FaUndo className="text-4xl text-emerald-400" />
+
+        {/* Subtle green center glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(16,120,70,0.15) 0%, transparent 80%)",
+          }}
+        />
+
+        {/* Centered message */}
+        <div className="relative z-10 flex flex-col items-center gap-4 text-center px-6">
+          <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mb-2">
+            <FaUndo className="text-2xl text-emerald-400" />
           </div>
-          <h1 className="text-3xl font-bold text-white font-geometric mb-2">That's everyone!</h1>
-          <p className="text-gray-400 font-poppins text-lg">Check back later for more developers.</p>
+          <h1 className="text-3xl font-bold text-white font-space tracking-tight">That's everyone!</h1>
+          <p className="text-zinc-500 font-poppins text-sm max-w-xs">
+            You've seen all the developers. Check back later for more connections.
+          </p>
         </div>
       </div>
     );
+
 
   // We only render the top 2 cards for performance and stacking effect
   const visibleCards = feed.slice(0, 2).reverse();
@@ -84,14 +111,34 @@ const Feed = () => {
   return (
     <div className="flex bg-black h-screen overflow-hidden text-white">
       {/* Main Feed Column */}
-      <div className="flex-1 flex flex-col items-center justify-center relative bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-hidden">
+      <div className="flex-1 flex flex-col items-center justify-center relative overflow-hidden">
 
-        {/* Animated Background Decor */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-[#073127]/20  blur-[120px] animate-pulse"></div>
-          <div className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] bg-emerald-900/10  blur-[120px] animate-pulse delay-1000"></div>
+        {/* ── RANDOMDEV Watermark Text Background ── */}
+        <div className="absolute inset-0 flex flex-col justify-center overflow-hidden pointer-events-none select-none" aria-hidden="true">
+          {["RANDOMDEV", "RANDOMDEV", "RANDOMDEV", "RANDOMDEV", "RANDOMDEV"].map((word, i) => (
+            <div
+              key={i}
+              className="whitespace-nowrap text-[clamp(80px,12vw,160px)] font-black uppercase tracking-tighter leading-none"
+              style={{
+                color: "rgba(255,255,255,0.05)",
+                fontFamily: "'Space Grotesk', sans-serif",
+                marginLeft: i % 2 === 0 ? "0px" : "-60px",
+              }}
+            >
+              {word}
+            </div>
+          ))}
         </div>
 
+        {/* Subtle radial green glow in center */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(16,120,70,0.18) 0%, transparent 80%)",
+          }}
+        />
+
+        {/* ── Card Stack ── */}
         <div className="relative w-full max-w-sm h-[600px] flex flex-col items-center justify-center z-10">
           <AnimatePresence>
             {feed.map((user, index) => {
@@ -111,21 +158,8 @@ const Feed = () => {
           </AnimatePresence>
         </div>
 
-        {/* Buttons for explicit actions */}
-        <div className="flex gap-8 mt-8 z-20">
-          <button
-            onClick={() => onSwipe("left", feed[0]._id)}
-            className="w-16 h-16 bg-black/40 backdrop-blur-md border border-white/10  flex items-center justify-center shadow-lg text-red-500 hover:bg-red-500/20 hover:scale-110 transition-all cursor-pointer"
-          >
-            <FaTimes className="text-3xl" />
-          </button>
-          <button
-            onClick={() => onSwipe("right", feed[0]._id)}
-            className="w-16 h-16 bg-[#073127]  flex items-center justify-center shadow-lg text-white hover:bg-[#0a4d3a] hover:scale-110 transition-all cursor-pointer shadow-emerald-900/50"
-          >
-            <FaHeart className="text-3xl" />
-          </button>
-        </div>
+        {/* ── Action Buttons ── moved inside UserCard */}
+
       </div>
     </div>
   );
@@ -158,8 +192,8 @@ const Card = ({ user, isFront, onSwipe, setDragX }) => {
     <motion.div
       style={{
         width: "100%",
-        maxWidth: 300, // Reduced from 340
-        height: 480,   // Reduced from 520
+        maxWidth: 310,
+        height: 530,
         x: isFront ? x : 0,
         y: isFront ? 0 : 0,
         rotate: isFront ? rotate : 0,
@@ -168,9 +202,9 @@ const Card = ({ user, isFront, onSwipe, setDragX }) => {
         cursor: isFront ? "grab" : "default",
       }}
       animate={{
-        scale: isFront ? 1 : 0.95,
+        scale: 1,
         marginTop: isFront ? 0 : -20,
-        opacity: isFront ? 1 : 0.5
+        opacity: 1,
       }}
       drag={isFront ? "x" : false}
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
@@ -200,7 +234,11 @@ const Card = ({ user, isFront, onSwipe, setDragX }) => {
         </>
       )}
 
-      <UserCard user={user} />
+      <UserCard
+        user={user}
+        onLike={isFront ? () => onSwipe("right") : undefined}
+        onPass={isFront ? () => onSwipe("left") : undefined}
+      />
     </motion.div>
   );
 };
