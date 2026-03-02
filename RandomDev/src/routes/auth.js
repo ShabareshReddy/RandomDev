@@ -8,7 +8,7 @@ const validator = require("validator");
 // ---------- SIGNUP ----------
 router.post("/signup", async (req, res) => {
   try {
-    const { firstName, lastName, emailId, password, age, gender } = req.body;
+    const { firstName, lastName, emailId, password, gender } = req.body;
 
     // Basic validation for required fields
     if (!firstName || !lastName || !emailId || !password) {
@@ -28,18 +28,18 @@ router.post("/signup", async (req, res) => {
       lastName,
       emailId,
       password: passwordHash,
-      age,
       gender,
     });
 
     const savedUser = await newUser.save();
     const token = await savedUser.getJWT();
 
+    const isProd = process.env.NODE_ENV === "production";
     res.cookie("token", token, {
       expires: new Date(Date.now() + 8 * 3600000),
       httpOnly: true,
-      secure: true,
-      sameSite: "None",
+      secure: isProd,
+      sameSite: isProd ? "None" : "Lax",
     });
 
     res.json({ message: "User Added successfully!", data: savedUser });
@@ -67,11 +67,12 @@ router.post("/login", async (req, res) => {
     if (isPasswordValid) {
       const token = await user.getJWT();
 
+      const isProd = process.env.NODE_ENV === "production";
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 * 3600000),
         httpOnly: true,
-        secure: true,
-        sameSite: "None",
+        secure: isProd,
+        sameSite: isProd ? "None" : "Lax",
       });
       res.send(user);
     } else {
@@ -83,11 +84,12 @@ router.post("/login", async (req, res) => {
 });
 
 router.post('/logout',async(req,res)=>{
-   res.cookie("token",null,{
-    expires:new Date(Date.now()),
+   const isProd = process.env.NODE_ENV === "production";
+   res.cookie("token", null, {
+    expires: new Date(Date.now()),
     httpOnly: true,
-    secure: true,
-    sameSite: "None",
+    secure: isProd,
+    sameSite: isProd ? "None" : "Lax",
    })
    res.send("Logout Successful!!")
 })
