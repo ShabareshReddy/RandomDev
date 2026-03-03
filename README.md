@@ -106,12 +106,15 @@ RandomDev is built using the **MERN Stack** with real-time communication technol
 ### Frontend
 - React.js
 - HTML5
-- CSS3
+- TailwindCSS
+- DaisyUI
 - JavaScript
+- Redux(State Management)
 
 ### Backend
 - Node.js
 - Express.js
+- multer(Local File Storage)
 
 ### Database
 - MongoDB
@@ -123,6 +126,7 @@ RandomDev is built using the **MERN Stack** with real-time communication technol
 - REST APIs
 - Git
 - GitHub
+- Postman(Testing API's)
 
 ---
 
@@ -142,3 +146,70 @@ This creates a **collaborative developer community**.
 ---
 
 ## 📂 Project Structure
+RandomDev
+│
+├── RandomDev-UI # Frontend (React + Vite)
+│ │
+│ ├── public
+│ ├── src
+│ │ ├── components
+│ │ ├── pages
+│ │ ├── utils
+│ │ ├── App.jsx
+│ │ ├── main.jsx
+│ │ └── index.css
+│ │
+│ ├── index.html
+│ ├── package.json
+│ ├── vite.config.js
+│ └── vercel.json
+│
+├── RandomDev # Backend (Node + Express)
+│ │
+│ ├── src
+│ │ ├── config
+│ │ ├── middlewares
+│ │ ├── models
+│ │ ├── routes
+│ │ └── utils
+│ │
+│ ├── uploads
+│ ├── app.js
+│ └── package.json
+│
+└── README.md
+## Screenshots of Applications
+<img width="1353" height="688" alt="image" src="https://github.com/user-attachments/assets/b7da12de-546f-4625-96ae-a5fe2ab2ffb8" />
+<img width="1339" height="689" alt="image" src="https://github.com/user-attachments/assets/e4a71825-4da0-4538-b03e-0f02be3c3ed6" />
+<img width="1340" height="674" alt="image" src="https://github.com/user-attachments/assets/3f2a6b0e-4755-4902-ab8a-794bfc800b6a" />
+<img width="1330" height="677" alt="image" src="https://github.com/user-attachments/assets/c1e0ff62-d6ca-4c3e-b761-946c27d2190b" />
+<img width="1333" height="672" alt="image" src="https://github.com/user-attachments/assets/e6e577f6-de4f-4a86-8873-85af9f166d16" />
+<img width="1344" height="677" alt="image" src="https://github.com/user-attachments/assets/6a98306c-a760-4c8e-a8ae-33d8af7dbb99" />
+
+
+---
+
+## ⚙️ Installation and Setup
+
+Follow these steps to run the project locally.
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/ShabareshReddy/RandomDev.git
+
+2️⃣ Navigate to the Project Folder
+cd RandomDev
+3️⃣ Install Backend Dependencies
+npm install
+4️⃣ Install Frontend Dependencies
+cd client
+npm install
+5️⃣ Start Backend Server
+npm run server
+6️⃣ Start Frontend Application
+npm start
+
+
+
+
