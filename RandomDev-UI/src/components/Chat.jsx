@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Paperclip, X, FileText, Image as ImageIcon, Download } from "lucide-react";
+import { Paperclip, X, FileText, Image as ImageIcon, Download, ArrowLeft } from "lucide-react";
 import { BASE_URL, AVATARS } from "../utils/constants";
 import { getSocket } from "../utils/socket";
 
@@ -144,7 +144,7 @@ const Chat = () => {
         <div className="flex h-screen bg-[#0a0a0a] text-white font-space overflow-hidden">
 
             {/* ── SIDEBAR: Connections ── */}
-            <div className="w-72 flex-shrink-0 bg-[#111111] border-r border-white/5 flex flex-col">
+            <div className={`w-full md:w-72 flex-shrink-0 bg-[#111111] border-r border-white/5 flex flex-col ${selectedUser ? 'hidden md:flex' : 'flex'}`}>
 
                 <div className="p-5 border-b border-white/5">
                     <h2 className="text-lg font-bold tracking-tight text-white">Messages</h2>
@@ -190,12 +190,18 @@ const Chat = () => {
             </div>
 
             {/* ── MAIN CHAT PANEL ── */}
-            <div className="flex-1 flex flex-col min-w-0">
+            <div className={`flex-1 flex flex-col min-w-0 ${!selectedUser ? 'hidden md:flex' : 'flex'}`}>
 
                 {selectedUser ? (
                     <>
                         {/* Chat Header */}
-                        <div className="flex items-center gap-3 px-6 py-4 bg-[#111111] border-b border-white/5 flex-shrink-0">
+                        <div className="flex items-center gap-3 px-4 md:px-6 py-4 bg-[#111111] border-b border-white/5 flex-shrink-0">
+                            <button
+                                onClick={() => setSelectedUser(null)}
+                                className="md:hidden p-2 -ml-2 text-zinc-400 hover:text-white transition-colors"
+                            >
+                                <ArrowLeft size={20} />
+                            </button>
                             <img
                                 src={AVATARS[selectedUser.avatar] ?? AVATARS[0]}
                                 alt={selectedUser.firstName}
@@ -257,8 +263,8 @@ const Chat = () => {
                                                             target="_blank"
                                                             rel="noreferrer"
                                                             className={`flex items-center gap-3 p-3 rounded-xl border transition-colors ${isMine
-                                                                    ? "border-black/10 bg-black/5 hover:bg-black/10"
-                                                                    : "border-white/10 bg-white/5 hover:bg-white/10"
+                                                                ? "border-black/10 bg-black/5 hover:bg-black/10"
+                                                                : "border-white/10 bg-white/5 hover:bg-white/10"
                                                                 }`}
                                                         >
                                                             <div className={`p-2 rounded-lg ${isMine ? "bg-black/10" : "bg-white/10"}`}>
@@ -285,7 +291,7 @@ const Chat = () => {
                         </div>
 
                         {/* Input */}
-                        <div className="p-4 bg-[#111111] border-t border-white/5 flex-shrink-0 flex flex-col gap-2">
+                        <div className="p-3 md:p-4 bg-[#111111] border-t border-white/5 flex-shrink-0 flex flex-col gap-2 relative z-20">
                             {/* File Preview */}
                             <AnimatePresence>
                                 {selectedFile && (
@@ -312,35 +318,37 @@ const Chat = () => {
                                 )}
                             </AnimatePresence>
 
-                            <div className="flex items-center gap-3">
-                                <input
-                                    type="file"
-                                    ref={fileInputRef}
-                                    style={{ display: "none" }}
-                                    onChange={handleFileChange}
-                                    accept="image/*,.pdf,.doc,.docx,.txt"
-                                />
-                                <button
-                                    onClick={() => fileInputRef.current?.click()}
-                                    className="p-3 bg-[#1e1e1e] hover:bg-white/5 text-zinc-400 hover:text-white border border-white/5 rounded-xl transition-colors flex-shrink-0"
-                                    title="Attach File"
-                                    disabled={isUploading}
-                                >
-                                    <Paperclip size={20} />
-                                </button>
-                                <input
-                                    type="text"
-                                    value={inputText}
-                                    onChange={(e) => setInputText(e.target.value)}
-                                    onKeyDown={handleKeyDown}
-                                    placeholder={isUploading ? "Uploading..." : "Type a message… (Enter to send)"}
-                                    disabled={isUploading}
-                                    className="flex-1 bg-[#1e1e1e] text-white text-sm font-poppins placeholder:text-zinc-600 px-4 py-3 rounded-xl border border-white/5 outline-none focus:border-green-500/50 transition-colors"
-                                />
+                            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch sm:items-center">
+                                <div className="flex gap-2 w-full">
+                                    <input
+                                        type="file"
+                                        ref={fileInputRef}
+                                        style={{ display: "none" }}
+                                        onChange={handleFileChange}
+                                        accept="image/*,.pdf,.doc,.docx,.txt"
+                                    />
+                                    <button
+                                        onClick={() => fileInputRef.current?.click()}
+                                        className="p-3 bg-[#1e1e1e] hover:bg-white/5 text-zinc-400 hover:text-white border border-white/5 rounded-xl transition-colors flex-shrink-0"
+                                        title="Attach File"
+                                        disabled={isUploading}
+                                    >
+                                        <Paperclip size={20} />
+                                    </button>
+                                    <input
+                                        type="text"
+                                        value={inputText}
+                                        onChange={(e) => setInputText(e.target.value)}
+                                        onKeyDown={handleKeyDown}
+                                        placeholder={isUploading ? "Uploading..." : "Type a message… (Enter to send)"}
+                                        disabled={isUploading}
+                                        className="flex-1 w-full min-w-0 bg-[#1e1e1e] text-white text-sm font-poppins placeholder:text-zinc-600 px-4 py-3 rounded-xl border border-white/5 outline-none focus:border-green-500/50 transition-colors"
+                                    />
+                                </div>
                                 <button
                                     onClick={sendMessage}
                                     disabled={(!inputText.trim() && !selectedFile) || isUploading}
-                                    className="bg-green-500 hover:bg-green-400 disabled:opacity-40 disabled:cursor-not-allowed text-black font-bold px-5 py-3 rounded-xl transition-colors text-sm flex-shrink-0 flex items-center gap-2"
+                                    className="bg-green-500 hover:bg-green-400 disabled:opacity-40 disabled:cursor-not-allowed text-black font-bold px-5 py-3 rounded-xl transition-colors text-sm flex-shrink-0 flex items-center justify-center gap-2 sm:w-auto w-full"
                                 >
                                     {isUploading ? (
                                         <>

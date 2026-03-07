@@ -4,21 +4,18 @@ import { FaCheckCircle, FaHeart, FaTimes } from "react-icons/fa";
 const UserCard = ({ user, onLike, onPass }) => {
   const { firstName, lastName, avatar, gender, about, skills } = user;
 
-  // Derive a role title from primary skill
   const primarySkill = skills && skills.length > 0 ? skills[0] : null;
   const roleTitle = primarySkill ? `${primarySkill} Developer` : "Software Developer";
 
   return (
     <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl group">
 
-      {/* ── Full-bleed avatar photo ── */}
       <img
         src={AVATARS[avatar] ?? AVATARS[0]}
         alt={firstName}
         className="absolute inset-0 w-full h-full object-cover object-top"
       />
 
-      {/* ── Gradient overlay — starts ~halfway, fully opaque at bottom ── */}
       <div
         className="absolute inset-0"
         style={{
@@ -27,10 +24,8 @@ const UserCard = ({ user, onLike, onPass }) => {
         }}
       />
 
-      {/* ── Text content pinned to bottom ── */}
       <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-4 flex flex-col gap-2.5 z-10">
 
-        {/* Name + verified */}
         <div className="flex items-center gap-2">
           <h2 className="text-xl font-bold text-white font-space tracking-tight drop-shadow-md">
             {firstName} {lastName}
@@ -38,17 +33,13 @@ const UserCard = ({ user, onLike, onPass }) => {
           <FaCheckCircle className="text-emerald-400 text-base flex-shrink-0" />
         </div>
 
-        {/* Role tag */}
         <span className="text-[11px] bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full w-fit border border-emerald-500/30 font-mono backdrop-blur-sm">
           {roleTitle}
         </span>
-
-        {/* About bio */}
         <p className="text-zinc-300 text-xs leading-relaxed line-clamp-2 font-poppins">
           {about || "Passionate developer crafting amazing things."}
         </p>
 
-        {/* Skills pills */}
         {skills && skills.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {skills.slice(0, 4).map((s, i) => (
@@ -62,7 +53,6 @@ const UserCard = ({ user, onLike, onPass }) => {
           </div>
         )}
 
-        {/* ── Action Buttons ── */}
         <div className="flex gap-3 mt-1">
           <button
             onClick={onPass}

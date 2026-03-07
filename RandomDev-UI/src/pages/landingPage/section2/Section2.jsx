@@ -19,18 +19,18 @@ const iconsRow1 = [
 ];
 
 const developers = [
-  { name: "Sarah K.", role: "SWE", image: "https://randomuser.me/api/portraits/women/44.jpg" },
-  { name: "James L.", role: "SDE", image: "https://randomuser.me/api/portraits/men/32.jpg" },
-  { name: "Elena R.", role: "DevOps Specialist", image: "https://randomuser.me/api/portraits/women/65.jpg" },
-  { name: "Michael C.", role: "QA Engineer", image: "https://randomuser.me/api/portraits/men/86.jpg" },
-  { name: "David W.", role: "Frontend Dev", image: "https://randomuser.me/api/portraits/men/11.jpg" },
-  { name: "Priya M.", role: "ML Engineer", image: "https://randomuser.me/api/portraits/women/28.jpg" },
-  { name: "Tom H.", role: "UI/UX Designer", image: "https://randomuser.me/api/portraits/men/45.jpg" },
-  { name: "Alex B.", role: "Security Specialist", image: "https://randomuser.me/api/portraits/women/68.jpg" },
-  { name: "Ryan S.", role: "SDE II", image: "https://randomuser.me/api/portraits/men/53.jpg" },
-  { name: "Aisha T.", role: "Testing Engineer", image: "https://randomuser.me/api/portraits/women/12.jpg" },
-  { name: "Carlos M.", role: "Cloud Architect", image: "https://randomuser.me/api/portraits/men/74.jpg" },
-  { name: "Nina P.", role: "Backend Dev", image: "https://randomuser.me/api/portraits/women/37.jpg" },
+  { name: "Sarah K.", role: "SWE", company: "Google", image: "https://randomuser.me/api/portraits/women/44.jpg" },
+  { name: "James L.", role: "SDE", company: "Amazon", image: "https://randomuser.me/api/portraits/men/32.jpg" },
+  { name: "Elena R.", role: "DevOps Specialist", company: "Netflix", image: "https://randomuser.me/api/portraits/women/65.jpg" },
+  { name: "Michael C.", role: "QA Engineer", company: "Meta", image: "https://randomuser.me/api/portraits/men/86.jpg" },
+  { name: "David W.", role: "Frontend Dev", company: "Apple", image: "https://randomuser.me/api/portraits/men/11.jpg" },
+  { name: "Priya M.", role: "ML Engineer", company: "OpenAI", image: "https://randomuser.me/api/portraits/women/28.jpg" },
+  { name: "Tom H.", role: "UI/UX Designer", company: "Figma", image: "https://randomuser.me/api/portraits/men/45.jpg" },
+  { name: "Alex B.", role: "Security Specialist", company: "Cloudflare", image: "https://randomuser.me/api/portraits/women/68.jpg" },
+  { name: "Ryan S.", role: "SDE II", company: "Microsoft", image: "https://randomuser.me/api/portraits/men/53.jpg" },
+  { name: "Aisha T.", role: "Testing Engineer", company: "Stripe", image: "https://randomuser.me/api/portraits/women/12.jpg" },
+  { name: "Carlos M.", role: "Cloud Architect", company: "AWS", image: "https://randomuser.me/api/portraits/men/74.jpg" },
+  { name: "Nina P.", role: "Backend Dev", company: "Spotify", image: "https://randomuser.me/api/portraits/women/37.jpg" },
 ];
 
 const MarqueeRow = ({ items, type = "icon", direction = "left", speed = 20 }) => {
@@ -51,29 +51,25 @@ const MarqueeRow = ({ items, type = "icon", direction = "left", speed = 20 }) =>
           <div
             key={index}
             className={`
-              bg-white rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 shrink-0 flex items-center justify-center
-              ${type === "icon" ? "w-20 h-20 md:w-24 md:h-24" : "w-[180px] h-[120px] md:w-[200px] md:h-[130px] p-4"}
+              bg-white rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300 shrink-0 flex items-center justify-center p-2 md:p-3
+              w-20 h-20 md:w-24 md:h-24
             `}
           >
             {type === "icon" ? (
               <item.Icon className={`text-4xl md:text-5xl ${item.color}`} />
             ) : (
-              <div className="flex flex-col w-full h-full justify-between">
-                {/* Top row: avatar + name */}
-                <div className="flex items-center gap-2.5">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-green-200 shrink-0"
-                  />
-                  <span className="text-zinc-900 font-bold text-sm md:text-base leading-tight truncate">
+              <div className="flex flex-col items-center justify-center gap-1 w-full h-full text-center">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-green-200 shrink-0"
+                />
+                <div className="flex flex-col justify-center">
+                  <span className="text-zinc-900 font-bold text-[10px] md:text-xs leading-none truncate w-[60px] md:w-[70px]">
                     {item.name}
                   </span>
-                </div>
-                {/* Role badge */}
-                <div className="mt-2">
-                  <span className="inline-block text-[11px] md:text-xs font-semibold tracking-wide text-green-700 border border-green-500 bg-green-50 px-2.5 py-0.5 rounded-full">
-                    {item.role}
+                  <span className="text-green-900 text-[8px] md:text-[9px] truncate w-[60px] md:w-[70px] mt-0.5 font-poppins text-green-900">
+                    @{item.company}
                   </span>
                 </div>
               </div>

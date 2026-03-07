@@ -61,7 +61,7 @@ const Requests = () => {
         </div>
 
         {requests.length === 0 ? (
-          <div className="flex flex-col items-center justify-center min-h-[40vh] text-center  max-w-2xl mx-auto">
+          <div className="flex flex-col items-center justify-center min-h-[40vh] text-center max-w-2xl mx-auto">
             <div className="text-6xl text-zinc-700 mb-6">
               <FaUserPlus />
             </div>

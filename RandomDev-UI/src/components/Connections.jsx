@@ -25,7 +25,7 @@ const Connections = () => {
   if (!connections) return null;
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+    <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
 
       {/* Animated Background Decor */}
       <div className="absolute inset-0 pointer-events-none">
@@ -33,16 +33,16 @@ const Connections = () => {
         <div className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] bg-emerald-900/10 blur-[120px] animate-pulse delay-1000"></div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 max-w-7xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 py-8 md:py-12 max-w-7xl relative z-10">
 
         {/* Header */}
-        <div className="flex items-center gap-4 mb-12">
-          <div className="p-3 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md">
-            <FaUserFriends className="text-2xl text-emerald-400" />
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-8 sm:mb-12 text-center sm:text-left">
+          <div className="p-3 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md inline-flex">
+            <FaUserFriends className="text-2xl sm:text-3xl text-emerald-400" />
           </div>
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-white font-space tracking-tight">Your Connections</h1>
-            <p className="text-zinc-400 font-poppins text-sm mt-1">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-space tracking-tight">Your Connections</h1>
+            <p className="text-zinc-400 font-poppins text-xs sm:text-sm mt-1 sm:mt-2">
               You have <span className="text-emerald-400 font-bold">{connections.length}</span> connection{connections.length !== 1 && 's'}
             </p>
           </div>
@@ -60,7 +60,7 @@ const Connections = () => {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8 px-4 sm:px-0">
             {connections.map((connection) => {
               const { _id, firstName, lastName, avatar, gender, about, skills } =
                 connection;
@@ -68,7 +68,7 @@ const Connections = () => {
               return (
                 <div
                   key={_id}
-                  className="relative h-[450px] bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden group shadow-2xl hover:border-emerald-500/30 transition-all duration-500"
+                  className="relative h-[400px] sm:h-[420px] md:h-[450px] w-full max-w-[360px] mx-auto bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden group shadow-2xl hover:border-emerald-500/30 transition-all duration-500"
                 >
                   {/* Full Background Image */}
                   <img
@@ -81,15 +81,15 @@ const Connections = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none"></div>
 
                   {/* Content Container */}
-                  <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col gap-4 z-20">
+                  <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 z-20">
 
                     {/* Name & Badge */}
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <h2 className="text-2xl font-bold font-space text-white drop-shadow-lg">
+                        <h2 className="text-xl sm:text-2xl font-bold font-space text-white drop-shadow-lg line-clamp-1">
                           {firstName} {lastName}
                         </h2>
-                        <FaCheckCircle className="text-emerald-400 text-lg drop-shadow-md" />
+                        <FaCheckCircle className="text-emerald-400 text-base sm:text-lg drop-shadow-md flex-shrink-0" />
                       </div>
 
                     </div>
@@ -102,9 +102,9 @@ const Connections = () => {
                     </div>
 
                     {/* Action Button */}
-                    <Link to={"/chat/" + _id} className="w-full">
-                      <button className="w-full py-3 rounded-xl font-bold text-white bg-green-600 hover:bg-green-500 shadow-lg shadow-green-900/20 hover:shadow-green-500/30 transition-all font-poppins text-sm flex items-center justify-center gap-2">
-                        <FaCommentDots className="text-lg" />
+                    <Link to={"/chat/" + _id} className="w-full mt-1 sm:mt-2">
+                      <button className="w-full py-2.5 sm:py-3 rounded-xl font-bold text-white bg-green-600 hover:bg-green-500 shadow-lg shadow-green-900/20 hover:shadow-green-500/30 transition-all font-poppins text-xs sm:text-sm flex items-center justify-center gap-2">
+                        <FaCommentDots className="text-base sm:text-lg" />
                         <span>Message</span>
                       </button>
                     </Link>
